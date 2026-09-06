@@ -14,6 +14,13 @@ Each transition is triggered by an explicit **event**.
 
 ## Transitions
 
+![Breakout state machine](uml/state-machine.png)
+
+> Source: [`uml/state-machine.puml`](uml/state-machine.puml).
+
+<details>
+<summary>Mermaid source</summary>
+
 ```mermaid
 stateDiagram-v2
     [*] --> title
@@ -25,6 +32,8 @@ stateDiagram-v2
     play --> gameover : Ball lost (lives == 0)
     gameover --> title : Enter pressed
 ```
+
+</details>
 
 ## Edge cases covered
 

@@ -103,6 +103,17 @@ Breakout/
 
 ## Documentation
 
+### Diagrams
+
+| Diagram | Image | PlantUML source |
+|---|---|---|
+| UML class diagram | [`docs/uml/class-diagram.png`](docs/uml/class-diagram.png) | [`docs/uml/class-diagram.puml`](docs/uml/class-diagram.puml) |
+| State machine (FSM) | [`docs/uml/state-machine.png`](docs/uml/state-machine.png) | [`docs/uml/state-machine.puml`](docs/uml/state-machine.puml) |
+
+Both are also embedded inline in the documents below.
+
+### Documents
+
 - [Architecture](docs/architecture.md) — UML class diagram, responsibilities and relationships.
 - [State machine](docs/state-machine.md) — game flow, transitions and edge cases.
 - [Game loop](docs/game-loop.md) — main loop pseudocode.
