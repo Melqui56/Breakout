@@ -1,4 +1,4 @@
--- Ball: the moving projectile of the game (skeleton).
+-- Ball: el proyectil móvil del juego (esqueleto).
 local Ball = {}
 Ball.__index = Ball
 
@@ -11,20 +11,19 @@ function Ball.new(x, y, radius)
 end
 
 function Ball:update(dt)
-    -- TODO: integrate velocity and apply collision responses.
+    -- TODO: integrar la velocidad y aplicar respuestas de colisión.
 end
 
 function Ball:draw()
-    -- TODO: render the ball.
+    -- TODO: renderizar la bola.
 end
 
 function Ball:bounce()
-    -- TODO: reverse a velocity component on collision.
+    -- TODO: invertir un componente de velocidad al colisionar.
 end
 
 function Ball:reset(x, y)
-    self.x, self.y = x, y
-    self.speedX, self.speedY = 0, 0
+    -- TODO: reposicionar la bola y reiniciar su velocidad.
 end
 
 return Ball

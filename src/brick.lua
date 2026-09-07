@@ -1,4 +1,4 @@
--- Brick: a destructible block of a level (skeleton).
+-- Brick: un bloque destructible de un nivel (esqueleto).
 local Brick = {}
 Brick.__index = Brick
 
@@ -11,15 +11,15 @@ function Brick.new(x, y, width, height, hp)
 end
 
 function Brick:update(dt)
-    -- TODO: per-frame brick behavior.
+    -- TODO: comportamiento por frame del ladrillo.
 end
 
 function Brick:draw()
-    -- TODO: render the brick.
+    -- TODO: renderizar el ladrillo.
 end
 
 function Brick:takeHit()
-    -- TODO: reduce hp and mark for removal when destroyed.
+    -- TODO: reducir hp y marcar para eliminar cuando se destruya.
 end
 
 return Brick

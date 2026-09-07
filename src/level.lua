@@ -1,4 +1,4 @@
--- Level: owns the bricks of a stage and reports completion (skeleton).
+-- Level: posee los ladrillos de una etapa e informa si está completo (esqueleto).
 local Brick = require("src.brick")
 
 local Level = {}
@@ -10,19 +10,19 @@ function Level.new()
 end
 
 function Level:load(levelData)
-    -- TODO: populate self.bricks from levelData.
+    -- TODO: poblar self.bricks a partir de levelData.
 end
 
 function Level:update(dt)
-    -- TODO: update bricks and clean destroyed ones.
+    -- TODO: actualizar ladrillos y limpiar los destruidos.
 end
 
 function Level:draw()
-    -- TODO: render all bricks.
+    -- TODO: renderizar todos los ladrillos.
 end
 
 function Level:isComplete()
-    -- TODO: return true when no bricks remain.
+    -- TODO: devolver true cuando no queden ladrillos.
     return false
 end
 

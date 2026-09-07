@@ -1,4 +1,4 @@
--- UI: renders score, lives, level and messages (skeleton).
+-- UI: renderiza puntaje, vidas, nivel y mensajes (esqueleto).
 local UI = {}
 UI.__index = UI
 
@@ -8,17 +8,15 @@ function UI.new()
 end
 
 function UI:setHud(score, lives, level)
-    self.score = score
-    self.lives = lives
-    self.level = level
+    -- TODO: actualizar puntaje, vidas y nivel del HUD.
 end
 
 function UI:setMessage(msg)
-    self.message = msg
+    -- TODO: definir el mensaje mostrado en pantalla.
 end
 
 function UI:draw()
-    -- TODO: render HUD elements and messages.
+    -- TODO: renderizar elementos del HUD y mensajes.
 end
 
 return UI

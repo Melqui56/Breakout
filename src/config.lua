@@ -1,4 +1,4 @@
--- Config: shared game constants.
+-- Config: constantes compartidas del juego.
 local Config = {
     width = 800,
     height = 600,

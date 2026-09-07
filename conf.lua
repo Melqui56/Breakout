@@ -1,4 +1,4 @@
--- LÖVE configuration.
+-- Configuración de LÖVE.
 function love.conf(t)
     t.identity = "Breakout"
     t.title = "Breakout"

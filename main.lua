@@ -1,4 +1,4 @@
--- Entry point: delegates LÖVE callbacks to the Game class.
+-- Punto de entrada: delega los callbacks de LÖVE a la clase Game.
 local Game = require("src.game")
 
 function love.load()

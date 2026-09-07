@@ -1,4 +1,4 @@
--- Paddle: the player-controlled platform (skeleton).
+-- Paddle: la plataforma controlada por el jugador (esqueleto).
 local Paddle = {}
 Paddle.__index = Paddle
 
@@ -10,19 +10,19 @@ function Paddle.new(x, y, width, speed)
 end
 
 function Paddle:update(dt, input)
-    -- TODO: apply movement from input intent.
+    -- TODO: aplicar movimiento según la intención del input.
 end
 
 function Paddle:moveLeft(dt)
-    -- TODO: move the paddle left by speed * dt.
+    -- TODO: mover la paleta a la izquierda con speed * dt.
 end
 
 function Paddle:moveRight(dt)
-    -- TODO: move the paddle right by speed * dt.
+    -- TODO: mover la paleta a la derecha con speed * dt.
 end
 
 function Paddle:draw()
-    -- TODO: render the paddle.
+    -- TODO: renderizar la paleta.
 end
 
 return Paddle
