@@ -1,6 +1,13 @@
--- Brick: a destructible block of a level (skeleton).
+-- Brick: a destructible block of a level.
 local Brick = {}
 Brick.__index = Brick
+
+-- Colour per remaining hit point, so durability is readable at a glance.
+local COLORS = {
+    { 0.35, 0.72, 0.98 },
+    { 0.98, 0.75, 0.30 },
+    { 0.94, 0.42, 0.42 },
+}
 
 function Brick.new(x, y, width, height, hp)
     local self = setmetatable({
@@ -11,15 +18,26 @@ function Brick.new(x, y, width, height, hp)
 end
 
 function Brick:update(dt)
-    -- TODO: per-frame brick behavior.
+    -- Bricks are static: nothing to advance per frame.
 end
 
 function Brick:draw()
-    -- TODO: render the brick.
+    if not self.alive then return end
+    local c = COLORS[math.min(self.hp, #COLORS)]
+    love.graphics.setColor(c[1], c[2], c[3])
+    love.graphics.rectangle("fill", self.x, self.y, self.width, self.height, 2, 2)
+    love.graphics.setColor(0, 0, 0, 0.35)
+    love.graphics.rectangle("line", self.x, self.y, self.width, self.height, 2, 2)
 end
 
+-- Absorb one hit. Returns true when the brick is destroyed.
 function Brick:takeHit()
-    -- TODO: reduce hp and mark for removal when destroyed.
+    self.hp = self.hp - 1
+    if self.hp <= 0 then
+        self.alive = false
+        return true
+    end
+    return false
 end
 
 return Brick
