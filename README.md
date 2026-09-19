@@ -125,7 +125,8 @@ Breakout/
 
 | Diagram | Image | PlantUML source |
 |---|---|---|
-| UML class diagram | [`docs/uml/class-diagram.png`](docs/uml/class-diagram.png) | [`docs/uml/class-diagram.puml`](docs/uml/class-diagram.puml) |
+| UML class diagram (ACA 1) | [`docs/uml/class-diagram.png`](docs/uml/class-diagram.png) | [`docs/uml/class-diagram.puml`](docs/uml/class-diagram.puml) |
+| UML class diagram (final, ACA 2 delta) | [`docs/uml/class-diagram-final.png`](docs/uml/class-diagram-final.png) | [`docs/uml/class-diagram-final.puml`](docs/uml/class-diagram-final.puml) |
 | State machine (FSM) | [`docs/uml/state-machine.png`](docs/uml/state-machine.png) | [`docs/uml/state-machine.puml`](docs/uml/state-machine.puml) |
 
 ### Documents
