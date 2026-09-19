@@ -12,7 +12,7 @@ local PowerUp = require("src.powerup")
 -- qué hace, solo la ejecuta al tocar la paleta.
 local PowerDefs = {
     {
-        label = "M", color = { 0.40, 0.80, 1.00 },
+        label = "M", color = { 0.40, 0.80, 1.00, 1 },
         apply = function(g)                      -- multibola
             local base = g.balls[1]
             if not base then return end
@@ -26,13 +26,13 @@ local PowerDefs = {
         end,
     },
     {
-        label = "W", color = { 0.60, 1.00, 0.60 },
+        label = "W", color = { 0.60, 1.00, 0.60, 1 },
         apply = function(g)                      -- paleta ancha (con tween)
             g.paddle.targetWidth = g.paddle.baseWidth * 1.5
         end,
     },
     {
-        label = "+", color = { 1.00, 0.80, 0.40 },
+        label = "+", color = { 1.00, 0.80, 0.40, 1 },
         apply = function(g)                      -- vida extra
             g.lives = g.lives + 1
         end,
