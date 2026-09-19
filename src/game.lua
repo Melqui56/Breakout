@@ -1,57 +1,83 @@
--- Game: posee la máquina de estados y las entidades principales (esqueleto).
+-- Game: estado compartido del mundo.
+-- Los estados leen y escriben aquí; la máquina de estados (StateMachine)
+-- vive en main.lua, que es quien cablea los estados.
+local Config = require("src.config")
 local Ball = require("src.ball")
 local Paddle = require("src.paddle")
 local Level = require("src.level")
 local UI = require("src.ui")
-local Config = require("src.config")
+local Effects = require("src.effects")
+local Layouts = require("src.levels")
 
-local Game = {}
-Game.__index = Game
+local Game = {
+    score = 0,
+    lives = 3,
+    levelNum = 1,
+    input = { left = false, right = false },
 
-local STATE = {
-    TITLE = "title",
-    PLAY = "play",
-    PAUSE = "pause",
-    GAMEOVER = "gameover",
+    paddle = nil,
+    balls = {},
+    level = nil,
+    ui = nil,
+    fx = nil,
+    powerups = {},
+    sm = nil,             -- lo asigna main.lua
+
+    sounds = {},
+    layouts = Layouts,
 }
 
-local instance = nil
-
-function Game.load()
-    instance = {
-        state = STATE.TITLE,
-        score = 0,
-        lives = 3,
-        levelNum = 1,
-        input = { left = false, right = false },
-        ball = Ball.new(Config.width / 2, Config.height / 2, Config.ballRadius),
-        paddle = Paddle.new(Config.width / 2, Config.paddleY, Config.paddleWidth, Config.paddleSpeed),
-        level = Level.new(),
-        ui = UI.new(),
-    }
-end
-
-function Game.update(dt)
-    -- TODO: consultar la máquina de estados y actualizar entidades
-    -- (ver docs/state-machine.md y docs/game-loop.md).
-end
-
-function Game.draw()
-    -- Texto visible del esqueleto (sin lógica de juego).
-    love.graphics.printf("Breakout", 0, 200, Config.width, "center")
-    love.graphics.printf("Presiona Enter para jugar", 0, 240, Config.width, "center")
-    love.graphics.printf("P = Pausar  |  Esc = Salir", 0, 280, Config.width, "center")
-end
-
-function Game.handleInput(key)
-    -- Por ahora todas las opciones cierran el juego.
-    if key == "return" or key == "escape" or key == "p" then
-        love.event.quit()
+-- Carga de recursos (se llama una sola vez desde love.load).
+function Game.init()
+    Game.fx = Effects.new()
+    Game.paddle = Paddle.new(0, Config.paddleY, Config.paddleWidth, Config.paddleSpeed)
+    Game.level = Level.new()
+    Game.ui = UI.new()
+    for _, name in ipairs({ "bounce", "brick", "lose", "power" }) do
+        local ok, src = pcall(love.audio.newSource, "assets/" .. name .. ".wav", "static")
+        Game.sounds[name] = ok and src or nil
     end
 end
 
-function Game.releaseInput(key)
-    -- TODO: limpiar banderas de input mantenido.
+function Game.playSound(name)
+    local s = Game.sounds[name]
+    if s then
+        s:stop()
+        s:play()
+    end
+end
+
+-- Empieza una partida nueva desde cero.
+function Game.newGame()
+    Game.score = 0
+    Game.lives = 3
+    Game.levelNum = 1
+    Game.powerups = {}
+    Game.paddle:reset()
+    Game:loadLevel(Game.levelNum)
+    Game:serveBall()
+end
+
+function Game:loadLevel(n)
+    Game.level:load(Game.layouts[n])
+end
+
+-- Deja una bola pegada a la paleta, lista para lanzar.
+function Game:serveBall()
+    Game.balls = { Ball.new(0, 0) }
+    local b = Game.balls[1]
+    b.stuck = true
+    Game:updateStuckBalls()
+end
+
+-- Reubica las bolas pegadas sobre la paleta (serve y play).
+function Game:updateStuckBalls()
+    for _, b in ipairs(Game.balls) do
+        if b.stuck then
+            b.x = Game.paddle.x + Game.paddle.w / 2 - b.w / 2
+            b.y = Game.paddle.y - b.h
+        end
+    end
 end
 
 return Game
