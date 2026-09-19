@@ -27,13 +27,13 @@ local Config = {
     powerupFall = 150,
     powerupChance = 0.22,  -- probabilidad de soltar power-up al romper un ladrillo
 
-    -- Color
-    colorBackground = { 0.06, 0.07, 0.11 },
-    colorBall = { 0.95, 0.95, 0.85 },
-    colorPaddle = { 0.35, 0.75, 0.95 },
-    colorBrick = { 0.90, 0.35, 0.35 },
-    colorStrong = { 0.80, 0.60, 0.20 },
-    colorText = { 0.90, 0.90, 0.95 },
+    -- Color (rgba, para la variante de tabla de love.graphics.setColor)
+    colorBackground = { 0.06, 0.07, 0.11, 1 },
+    colorBall = { 0.95, 0.95, 0.85, 1 },
+    colorPaddle = { 0.35, 0.75, 0.95, 1 },
+    colorBrick = { 0.90, 0.35, 0.35, 1 },
+    colorStrong = { 0.80, 0.60, 0.20, 1 },
+    colorText = { 0.90, 0.90, 0.95, 1 },
 }
 
 -- x del centro de la columna col (1..brickCols)
