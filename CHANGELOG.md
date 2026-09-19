@@ -6,6 +6,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-09-20
+
+### Added
+
+- AABB collision system (`src/collision.lua`): detection plus axis resolution
+  (smallest overlap) and angle-based paddle bounce.
+- Reusable finite state machine (`src/statemachine.lua`) with six states
+  (`states/title`, `serve`, `play`, `pause`, `gameover`, `victory`).
+- `StrongBrick` — inherits from `Brick` and overrides `onHit()` (polymorphism).
+- `PowerUp` — multiball, wide paddle and extra life; the effect is a function.
+- Data-driven levels (`src/levels.lua`) with three levels.
+- Game feel: particles, screen shake, tweening (paddle width, hit flash) and
+  sound effects (`assets/*.wav`).
+- Sub-stepping in the ball integration to avoid tunneling.
+- Shared world rendering (`src/scene.lua`).
+
+### Changed
+
+- `Game` is now a shared world-state module; the FSM lives in `main.lua`.
+- `Ball` uses an AABB bounding box and exposes `moveStep` / `launch`.
+
 ## [0.1.0] - 2026-09-03
 
 ### Added
