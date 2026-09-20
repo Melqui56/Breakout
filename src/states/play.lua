@@ -42,7 +42,11 @@ local PowerDefs = {
 local function dropPower(brick)
     if love.math.random() >= Config.powerupChance then return end
     local def = PowerDefs[love.math.random(#PowerDefs)]
-    local pu = PowerUp.new(brick.x + brick.w / 2 - 9, brick.y, def.apply, def.color, def.label)
+    local pu = PowerUp.new(
+        brick.x + brick.w / 2 - Config.powerupW / 2,
+        brick.y,
+        def.apply, def.color, def.label
+    )
     table.insert(Game.powerups, pu)
 end
 
@@ -81,11 +85,19 @@ local function moveAndCollide(ball, dt)
         -- Ladrillos: el ladrillo responde por sí mismo (polimorfismo)
         for _, brick in ipairs(Game.level.bricks) do
             if not brick._dead and Collision.aabb(ball, brick) then
-                Game.score = Game.score + brick:onHit()
+                local pts = brick:onHit()
+                Game.score = Game.score + pts
                 Game.playSound("brick")
-                Game.fx:burst(brick.x + brick.w / 2, brick.y + brick.h / 2, brick.color, 12)
-                Game.fx:shakeIt(6)
-                dropPower(brick)
+                local cx = brick.x + brick.w / 2
+                local cy = brick.y + brick.h / 2
+                if brick._dead then
+                    Game.fx:burst(cx, cy, brick.color, 14)
+                    Game.fx:shakeIt(6)
+                    dropPower(brick)
+                else
+                    Game.fx:burst(cx, cy, brick.color, 5)
+                    Game.fx:shakeIt(2)
+                end
                 Collision.resolveBallBrick(ball, brick)
                 break
             end

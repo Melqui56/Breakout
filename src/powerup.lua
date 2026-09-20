@@ -1,14 +1,17 @@
 -- PowerUp: un objeto que cae y, al tocar la paleta, ejecuta un efecto.
 -- El efecto es una función que se recibe al construir el power-up:
 -- así el objeto no necesita saber qué hace, solo lo ejecuta.
+local Config = require("src.config")
+
 local PowerUp = {}
 PowerUp.__index = PowerUp
 
 function PowerUp.new(x, y, efecto, color, label)
     return setmetatable({
         x = x, y = y,
-        w = 18, h = 18,
-        vy = 150,
+        w = Config.powerupW,
+        h = Config.powerupH,
+        vy = Config.powerupFall,
         efecto = efecto,     -- function(game)
         color = color or { 1, 1, 1 },
         label = label or "?",
@@ -18,7 +21,7 @@ end
 
 function PowerUp:update(dt)
     self.y = self.y + self.vy * dt
-    if self.y > 700 then self._dead = true end
+    if self.y > Config.height then self._dead = true end
 end
 
 function PowerUp:draw()

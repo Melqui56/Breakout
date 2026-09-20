@@ -20,8 +20,9 @@ function StrongBrick:onHit()
     self._flash = 0.12
     if self._hp <= 0 then
         self._dead = true
+        return self.points
     end
-    return self.points
+    return 5
 end
 
 return StrongBrick
