@@ -77,8 +77,8 @@ bricks, power-ups and game feel.
   - `Esc` — pause / back to menu
   - `R` — restart from the game over / victory screen
 - **Rules**
-  - Clear all bricks to advance to the next level (3 levels).
-  - Normal bricks: 10 points · strong bricks: 20 points (two hits).
+  - Clear all bricks to advance to the next level (4 levels).
+  - Normal bricks: 10 points · strong bricks: 5 points on the first hit and 20 when destroyed.
   - You start with 3 lives; losing every ball costs one life.
   - Destroyed bricks may drop a power-up: **M** multiball, **W** wide paddle,
     **+** extra life.

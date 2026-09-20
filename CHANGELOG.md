@@ -6,6 +6,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- Level 4 data (`src/levels.lua`): “Corona final,” preserving the existing
+  data-driven numeric codes.
+- Enriched HUD (`src/ui.lua`): labeled score, heart-based lives, level badge,
+  and boxed messages.
+
+### Changed
+
+- `StrongBrick` now scores 5 points on a damaging first hit and 20 when
+  destroyed; destruction-only effects and power-ups are conditional on the
+  destroyed state.
+- `PowerUp` dimensions, fall speed, spawn centering, and off-screen cleanup
+  now use shared `Config` constants.
+
 ## [0.2.0] - 2026-09-20
 
 ### Added

@@ -7,35 +7,45 @@ independent.
 ## Pseudocode
 
 ```
-LOVE.load():
-    window.setTitle("Breakout")
-    Game.load()
+love.load():
+    Game.init()                      # load paddle, level, UI, effects, sounds
+    Game.sm = StateMachine.new(...)  # wire the six state modules
+    Game.sm:switch("title")
 
-LOVE.update(dt):
-    input = readInput()
-    Game.handleInput(input)        # translate input into game events
-    Game.update(dt)                # advance entities using delta time
+love.update(dt):
+    Game.input.left = love.keyboard.isDown("left", "a")
+    Game.input.right = love.keyboard.isDown("right", "d")
+    Game.sm:update(dt)               # delegate to the active state
 
-LOVE.draw():
-    Game.draw()                    # render entities and UI in order
+love.draw():
+    translate(Game.fx:shakeOffset()) # screen-shake offset only
+    Game.sm:draw()                    # render the active state
+
+love.keypressed(key):
+    Game.sm:keypressed(key)          # movement stays in update; events go to states
 ```
 
-## Game.update(dt)
+## Play-state update
 
 ```
-Game.update(dt):
-    if state is PLAY:
-        ball.update(dt)            # integrate velocity, check collisions
-        paddle.update(dt)          # move paddle from input intent
-        level.update(dt)           # update bricks, detect completion
-        if ball is lost:
-            lives -= 1
-            if lives == 0: state = GAMEOVER
-            else: resetBall(); keep state = PLAY
-        if level.isComplete():
-            nextLevel(); keep state = PLAY
+play.update(dt):
+    paddle:update(dt, input)       # move from input intent
+    Game:updateStuckBalls()        # keep the pre-launch ball on the paddle
+    for each ball:
+        integrate in sub-steps and resolve walls, paddle, and bricks
+        remove it when fully below the screen
+    if no balls remain:
+        lives -= 1
+        if lives == 0: state = GAMEOVER
+        else: serve another ball in SERVE
+    update power-ups, level, and effects
+    if level.isComplete():
+        load the next layout and SERVE, or switch to VICTORY on the final level
+    ui:setHud(score, lives, level)
     # state = PAUSE: nothing advances
 ```
+
+New games reset score to `0`, lives to `3`, and start at level `1`.
 
 ## Design rules
 
